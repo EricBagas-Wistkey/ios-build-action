@@ -1,5 +1,6 @@
 project_name= "moneyHero"
 scheme = project_name
+build_configuration = ENV['CONFIGURATION']
 project_path = "./#{project_name}.xcodeproj"
 cached_derived_data_path = File.expand_path("../cached_derived_data")
 cache_folder = File.expand_path("#{cached_derived_data_path}/Build/Intermediates.noindex/ArchiveIntermediates/#{scheme}/BuildProductsPath/#{build_configuration}-iphoneos")
