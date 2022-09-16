@@ -1,4 +1,4 @@
-name: "Build iOS Action"
+name: "Build iOS Action with cache checking"
 author: "SparkFabrik"
 branding:
   icon: "smartphone"
