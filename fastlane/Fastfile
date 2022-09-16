@@ -41,6 +41,7 @@ platform :ios do
     use_workspace = !ENV['WORKSPACE_PATH'].empty?
     match(type: ENV['MATCH_BUILD_TYPE'], api_key: api_key)
 
+
     if ENV['INCREMENT_BUILD_NUMBER'] == 'true'
       increment_build_number(
         xcodeproj: ENV['PROJECT_PATH'],
@@ -65,35 +66,40 @@ platform :ios do
       end
 
       puts "### build only .xcodeproj"
-      gym(
+      build_app(
         clean: false,
-        project: "./#{project_name}.xcodeproj",
-        scheme: ENV['SCHEME'],
-        export_method: ENV['EXPORT_METHOD'],
+        workspace: use_workspace ? ENV['WORKSPACE_PATH'] : nil,
+        project: !use_workspace ? ENV['PROJECT_PATH'] : nil,
         configuration: ENV['CONFIGURATION'],
-        destination: 'generic/platform=iOS',
-        export_options: {
-          compileBitcode: false,
-          uploadBitcode: false,
-          uploadSymbols: false 
-        },
+        scheme: ENV['SCHEME'],
+        output_directory: File.dirname(ENV['OUTPUT_PATH']),
+        output_name: File.basename(ENV['OUTPUT_PATH']),
+        export_method: ENV['EXPORT_METHOD'],
+        export_team_id: ENV['TEAM_ID'],
+        silent: true,
+        include_bitcode: true,
         xcargs: [
-            # Set paths where xcode can find pods binaries
-            "PODS_CONFIGURATION_BUILD_DIR=#{cache_folder}",
-            "FRAMEWORK_SEARCH_PATHS='#{cache_folder} $(inherited)'",
-            "LIBRARY_SEARCH_PATHS='#{cache_folder} $(inherited)'",
-            "SWIFT_INCLUDE_PATHS=#{cache_folder}"
+          # Set paths where xcode can find pods binaries
+          "PODS_CONFIGURATION_BUILD_DIR=#{cache_folder}",
+          "FRAMEWORK_SEARCH_PATHS='#{cache_folder} $(inherited)'",
+          "LIBRARY_SEARCH_PATHS='#{cache_folder} $(inherited)'",
+          "SWIFT_INCLUDE_PATHS=#{cache_folder}"
         ].join(" ")
       )
     else
       puts "### build full app .xcworkspace"
-      gym(
-        scheme: ENV['SCHEME'],
-        workspace: "./#{project_name}.xcworkspace",
-        export_method: ENV['EXPORT_METHOD'],
-        derived_data_path: cached_derived_data_path,
+      build_app(
+        workspace: use_workspace ? ENV['WORKSPACE_PATH'] : nil,
+        project: !use_workspace ? ENV['PROJECT_PATH'] : nil,
         configuration: ENV['CONFIGURATION'],
+        scheme: ENV['SCHEME'],
+        output_directory: File.dirname(ENV['OUTPUT_PATH']),
+        output_name: File.basename(ENV['OUTPUT_PATH']),
         clean: true,
+        export_method: ENV['EXPORT_METHOD'],
+        export_team_id: ENV['TEAM_ID'],
+        silent: true,
+        include_bitcode: true,
       )
 
       puts "### reduce cache size by removing unnecessary files"
