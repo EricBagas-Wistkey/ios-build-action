@@ -50,21 +50,6 @@ platform :ios do
         ) + 1).to_s,
       )
     end
-
-    # build_app(
-    #   workspace: use_workspace ? ENV['WORKSPACE_PATH'] : nil,
-    #   project: !use_workspace ? ENV['PROJECT_PATH'] : nil,
-    #   configuration: ENV['CONFIGURATION'],
-    #   scheme: ENV['SCHEME'],
-    #   output_directory: File.dirname(ENV['OUTPUT_PATH']),
-    #   output_name: File.basename(ENV['OUTPUT_PATH']),
-    #   clean: true,
-    #   export_method: ENV['EXPORT_METHOD'],
-    #   export_team_id: ENV['TEAM_ID'],
-    #   silent: true,
-    #   include_bitcode: true,
-    # )
-
     # puts "### check if cache exists "
     if(File.exist?(cache_folder))
       # - Loop over scripts in build phase `[CP] Copy Pods Resources`
@@ -102,11 +87,11 @@ platform :ios do
     else
       puts "### build full app .xcworkspace"
       gym(
-        scheme: scheme,
+        scheme: ENV['SCHEME'],
         workspace: "./#{project_name}.xcworkspace",
-        export_method: export_method,
+        export_method: ENV['EXPORT_METHOD'],
         derived_data_path: cached_derived_data_path,
-        configuration: build_configuration,
+        configuration: ENV['CONFIGURATION'],
         clean: true,
       )
 
