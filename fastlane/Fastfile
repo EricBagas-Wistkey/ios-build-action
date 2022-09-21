@@ -99,7 +99,6 @@ platform :ios do
       puts "### build only .xcodeproj"
       build_app(
         clean: false,
-        workspace: use_workspace ? ENV['WORKSPACE_PATH'] : nil,
         project: !use_workspace ? ENV['PROJECT_PATH'] : nil,
         configuration: ENV['CONFIGURATION'],
         scheme: ENV['SCHEME'],
