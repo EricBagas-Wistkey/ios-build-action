@@ -130,6 +130,7 @@ platform :ios do
         export_team_id: ENV['TEAM_ID'],
         silent: true,
         include_bitcode: true,
+        derived_data_path: cached_derived_data_path,
       )
 
       puts "### reduce cache size by removing unnecessary files"
