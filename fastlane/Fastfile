@@ -106,7 +106,6 @@ platform :ios do
         configuration: ENV['CONFIGURATION'],
         output_directory: File.dirname(ENV['OUTPUT_PATH']),
         output_name: File.basename(ENV['OUTPUT_PATH']),
-        destination: 'generic/platform=iOS',
         export_team_id: ENV['TEAM_ID'],
         export_options: {
           compileBitcode: false,
