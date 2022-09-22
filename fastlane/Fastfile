@@ -100,7 +100,7 @@ platform :ios do
 
       gym(
         clean: false,
-        project: "../mh-finext-app/ios/#{project_name}.xcworkspace",
+        project: "../mh-finext-app/ios/#{project_name}.xcodeproj",
         scheme: project_name,
         export_method: ENV['EXPORT_METHOD'],
         configuration: ENV['CONFIGURATION'],
