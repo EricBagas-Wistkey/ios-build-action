@@ -114,7 +114,7 @@ platform :ios do
         },
         xcargs: [
             # Set paths where xcode can find pods binaries
-            "PODS_CONFIGURATION_BUILD_DIR= ../mh-finext-app/ios/Pods",
+            "PODS_CONFIGURATION_BUILD_DIR='#{cache_folder}'",
             "FRAMEWORK_SEARCH_PATHS='#{cache_folder} $(inherited)'",
             "LIBRARY_SEARCH_PATHS='#{cache_folder} $(inherited)'",
             "SWIFT_INCLUDE_PATHS=#{cache_folder}"
@@ -140,11 +140,7 @@ platform :ios do
         File.expand_path("#{cached_derived_data_path}/info.plist"),
         File.expand_path("#{cached_derived_data_path}/Logs"),
         File.expand_path("#{cached_derived_data_path}/SourcePackages"),
-        File.expand_path("#{cached_derived_data_path}/ModuleCache.noindex"),
-        File.expand_path("#{intermediates_path}/IntermediateBuildFilesPath/#{project_name}.build"),
-        File.expand_path("#{intermediates_path}/IntermediateBuildFilesPath/XCBuildData"),
-        File.expand_path("#{intermediates_path}/BuildProductsPath/SwiftSupport"),
-        File.expand_path("#{intermediates_path}/PrecompiledHeaders")
+        File.expand_path("#{cached_derived_data_path}/ModuleCache.noindex")
       ]
       dirs.each { |dir| FileUtils.rm_rf(dir) }
     end
