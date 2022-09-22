@@ -134,15 +134,6 @@ platform :ios do
         export_team_id: ENV['TEAM_ID'],
       )
 
-      puts "### reduce cache size by removing unnecessary files"
-      require 'fileutils';
-      dirs = [
-        File.expand_path("#{cached_derived_data_path}/info.plist"),
-        File.expand_path("#{cached_derived_data_path}/Logs"),
-        File.expand_path("#{cached_derived_data_path}/SourcePackages"),
-        File.expand_path("#{cached_derived_data_path}/ModuleCache.noindex")
-      ]
-      dirs.each { |dir| FileUtils.rm_rf(dir) }
     end
 
     if ENV["BROWSERSTACK_UPLOAD"] == 'true'
