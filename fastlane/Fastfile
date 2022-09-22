@@ -99,9 +99,9 @@ platform :ios do
       puts "### build only .xcodeproj"
 
       gym(
-        clean: true,
+        clean: false,
         project: "../mh-finext-app/ios/#{project_name}.xcodeproj",
-        scheme: ENV['SCHEME'],
+        scheme: project_name,
         export_method: ENV['EXPORT_METHOD'],
         configuration: ENV['CONFIGURATION'],
         output_directory: File.dirname(ENV['OUTPUT_PATH']),
@@ -123,7 +123,7 @@ platform :ios do
     else
       puts "### build full app .xcworkspace"
       gym(
-        scheme: ENV['SCHEME'],
+        scheme: project_name,
         workspace: "./#{project_name}.xcworkspace",
         export_method: ENV['EXPORT_METHOD'],
         derived_data_path: cached_derived_data_path,
