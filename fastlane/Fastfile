@@ -99,7 +99,7 @@ platform :ios do
       puts "### build only .xcodeproj"
 
       gym(
-        clean: false,
+        clean: true,
         project: "../mh-finext-app/ios/#{project_name}.xcodeproj",
         scheme: ENV['SCHEME'],
         export_method: ENV['EXPORT_METHOD'],
