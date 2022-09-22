@@ -100,7 +100,7 @@ platform :ios do
 
       gym(
         clean: false,
-        project: "../#{project_name}.xcodeproj",
+        project: "../ios/#{project_name}.xcodeproj",
         scheme: ENV['SCHEME'],
         export_method: ENV['EXPORT_METHOD'],
         configuration: ENV['CONFIGURATION'],
