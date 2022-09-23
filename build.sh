@@ -24,4 +24,4 @@ echo $MOBILEPROVISION_BASE64 | base64 --decode > ios-build.mobileprovision
 if [[ $BROWSERSTACK_UPLOAD = true || $BUILD_PODS = true ]]; then
     bundle install
 fi
-fastlane export_ipa
+bundle exec fastlane export_ipa
