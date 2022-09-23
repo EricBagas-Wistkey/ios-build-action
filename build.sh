@@ -26,4 +26,7 @@ echo $MOBILEPROVISION_BASE64 | base64 --decode > ios-build.mobileprovision
 if [[ $BROWSERSTACK_UPLOAD = true || $BUILD_PODS = true ]]; then
     bundle install
 fi
+
+brew install cocoapods
+sudo gem install cocoapods
 fastlane export_ipa
