@@ -87,7 +87,7 @@ platform :ios do
     if(File.exist?(cache_folder))
       # - Loop over scripts in build phase `[CP] Copy Pods Resources`
       # - Prepend `BUILT_PRODUCTS_DIR=#{cache_folder}``
-      fastlane_require 'xcodeproj'
+      # fastlane_require 'xcodeproj'
       project = Xcodeproj::Project.open("../ios/#{project_name}.xcodeproj")
       target = project.targets.select { |target| target.name == project_name }.first
       phase = target.shell_script_build_phases.select { |phase| phase.name && phase.name.include?('Copy Pods Resources') }.first
@@ -100,7 +100,7 @@ platform :ios do
 
       gym(
         clean: false,
-        project: "../mh-finext-app/ios/#{project_name}.xcodeproj",
+        project: "../mh-finext-app/ios/#{project_name}.xcworkspace",
         scheme: project_name,
         export_method: ENV['EXPORT_METHOD'],
         configuration: ENV['CONFIGURATION'],
