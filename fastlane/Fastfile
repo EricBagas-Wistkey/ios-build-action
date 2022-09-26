@@ -98,12 +98,6 @@ platform :ios do
 
       puts "### build only .xcodeproj"
 
-      cocoapods(
-        clean: true,
-        podfile: "../mh-finext-app/ios/Podfile",
-        try_repo_update_on_error: true
-      )
-
       gym(
         clean: false,
         project: "../mh-finext-app/ios/#{project_name}.xcodeproj",

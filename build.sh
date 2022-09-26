@@ -3,10 +3,8 @@
 if ! type fastlane > /dev/null 2>&1; then
   if type brew > /dev/null 2>&1; then
     brew install fastlane
-    brew install cocoapods
   else
     sudo gem install fastlane -NV
-    sudo gem install cocoapods
   fi
 fi
 
@@ -26,7 +24,4 @@ echo $MOBILEPROVISION_BASE64 | base64 --decode > ios-build.mobileprovision
 if [[ $BROWSERSTACK_UPLOAD = true || $BUILD_PODS = true ]]; then
     bundle install
 fi
-
-brew install cocoapods
-sudo gem install cocoapods
 fastlane export_ipa
