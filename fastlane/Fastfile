@@ -117,7 +117,8 @@ platform :ios do
             "PODS_CONFIGURATION_BUILD_DIR='#{cache_folder}'",
             "FRAMEWORK_SEARCH_PATHS='#{cache_folder} $(inherited)'",
             "LIBRARY_SEARCH_PATHS='#{cache_folder} $(inherited)'",
-            "SWIFT_INCLUDE_PATHS=#{cache_folder}"
+            "SWIFT_INCLUDE_PATHS=#{cache_folder}",
+             "-sdk", "iphoneos" + xcode_version.strip # Specify the current public (GM) version of Xcode
         ].join(" ")
       )
     else
@@ -132,6 +133,9 @@ platform :ios do
         output_name: File.basename(ENV['OUTPUT_PATH']),
         clean: true,
         export_team_id: ENV['TEAM_ID'],
+        xcargs: [
+          "-sdk", "iphoneos" + xcode_version.strip # Specify the current public (GM) version of Xcode
+        ]
       )
 
     end
