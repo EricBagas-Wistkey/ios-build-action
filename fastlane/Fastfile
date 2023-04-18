@@ -1,6 +1,3 @@
-# before_all do
-#   xcversion_install(version: "latest")
-# end
 project_name= "moneyHero"
 scheme = project_name
 build_configuration = ENV['CONFIGURATION']
@@ -15,7 +12,6 @@ default_platform(:ios)
 platform :ios do
   desc "Export ipa"
   lane :export_ipa do
-    xcversion(version: "14.2")
     keychain_password = SecureRandom.uuid
 
     create_keychain(
@@ -116,13 +112,15 @@ platform :ios do
           uploadBitcode: false,
           uploadSymbols: false 
         },
+        
         xcargs: [
             # Set paths where xcode can find pods binaries
             "PODS_CONFIGURATION_BUILD_DIR='#{cache_folder}'",
             "FRAMEWORK_SEARCH_PATHS='#{cache_folder} $(inherited)'",
             "LIBRARY_SEARCH_PATHS='#{cache_folder} $(inherited)'",
             "SWIFT_INCLUDE_PATHS=#{cache_folder}",
-             "-sdk", "iphoneos"
+             "-sdk", "iphoneos",
+             "-allowProvisioningUpdates"
         ].join(" ")
       )
     else
@@ -138,7 +136,7 @@ platform :ios do
         clean: true,
         export_team_id: ENV['TEAM_ID'],
         xcargs: [
-          "-sdk", "iphoneos" # Specify the current public (GM) version of Xcode
+          "-sdk", "iphoneos", "-allowProvisioningUpdates"
         ]
       )
 
