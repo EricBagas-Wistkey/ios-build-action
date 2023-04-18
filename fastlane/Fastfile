@@ -1,3 +1,6 @@
+# before_all do
+#   xcversion_install(version: "latest")
+# end
 project_name= "moneyHero"
 scheme = project_name
 build_configuration = ENV['CONFIGURATION']
@@ -112,13 +115,14 @@ platform :ios do
           uploadBitcode: false,
           uploadSymbols: false 
         },
+        xcversion: "14.2",
         xcargs: [
             # Set paths where xcode can find pods binaries
             "PODS_CONFIGURATION_BUILD_DIR='#{cache_folder}'",
             "FRAMEWORK_SEARCH_PATHS='#{cache_folder} $(inherited)'",
             "LIBRARY_SEARCH_PATHS='#{cache_folder} $(inherited)'",
             "SWIFT_INCLUDE_PATHS=#{cache_folder}",
-             "-sdk", "iphoneos" + xcode_version.strip # Specify the current public (GM) version of Xcode
+             "-sdk", "iphoneos"
         ].join(" ")
       )
     else
@@ -133,8 +137,9 @@ platform :ios do
         output_name: File.basename(ENV['OUTPUT_PATH']),
         clean: true,
         export_team_id: ENV['TEAM_ID'],
+        xcversion: "14.2",
         xcargs: [
-          "-sdk", "iphoneos" + "14.2" # Specify the current public (GM) version of Xcode
+          "-sdk", "iphoneos" # Specify the current public (GM) version of Xcode
         ]
       )
 
