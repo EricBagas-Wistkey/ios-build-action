@@ -134,7 +134,7 @@ platform :ios do
         clean: true,
         export_team_id: ENV['TEAM_ID'],
         xcargs: [
-          "-sdk", "iphoneos" + xcode_version.strip # Specify the current public (GM) version of Xcode
+          "-sdk", "iphoneos" + "14.2" # Specify the current public (GM) version of Xcode
         ]
       )
 
