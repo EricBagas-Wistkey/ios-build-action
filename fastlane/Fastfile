@@ -15,7 +15,7 @@ default_platform(:ios)
 platform :ios do
   desc "Export ipa"
   lane :export_ipa do
-    sh('xcode-select -s /Applications/Xcode_14.2.app')
+    # sh('xcode-select -s /Applications/Xcode_14.2.app')
     keychain_password = SecureRandom.uuid
 
     create_keychain(
@@ -116,7 +116,7 @@ platform :ios do
           uploadBitcode: false,
           uploadSymbols: false 
         },
-        # xcversion: "14.2",
+        xcversion: "14.2",
         xcargs: [
             # Set paths where xcode can find pods binaries
             "PODS_CONFIGURATION_BUILD_DIR='#{cache_folder}'",
@@ -138,7 +138,7 @@ platform :ios do
         output_name: File.basename(ENV['OUTPUT_PATH']),
         clean: true,
         export_team_id: ENV['TEAM_ID'],
-        # xcversion: "14.2",
+        xcversion: "14.2",
         xcargs: [
           "-sdk", "iphoneos" # Specify the current public (GM) version of Xcode
         ]
